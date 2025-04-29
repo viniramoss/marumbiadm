@@ -201,6 +201,84 @@ function renderChart(weekly) {
   });
 }
 
+/* ===================================================================== */
+/* === NAV + CADASTRO ================================================== */
+/*  (mantém o dashboard que você já tem; só acrescenta nova página)     */
+/* ===================================================================== */
+(function(){
+
+  const links = {
+    dash : document.getElementById('nav-dashboard'),
+    cad  : document.getElementById('nav-cadastro'),
+    set  : document.getElementById('nav-settings')
+  };
+  const pages = {
+    dash : document.getElementById('page-dashboard'),
+    cad  : document.getElementById('page-cadastro'),
+    set  : document.getElementById('page-settings')
+  };
+
+  /* ---- navegação ---- */
+  function show(key){
+    Object.entries(links).forEach(([k,a]) => a.classList.toggle('active', k===key));
+    Object.entries(pages).forEach(([k,p]) => p.classList.toggle('visible', k===key));
+
+    if (key === 'dash') {           // dashboard já existente
+      if (typeof carregarDashboard === 'function') carregarDashboard();
+    }
+    if (key === 'cad')  { initCadastro(); }
+  }
+
+  links.dash.onclick = e => { e.preventDefault(); show('dash'); };
+  links.cad .onclick = e => { e.preventDefault(); show('cad' ); };
+  links.set .onclick = e => { e.preventDefault(); show('set' ); };
+
+  /* ---- cadastro (offline em memória) ---- */
+  let cadastroInicializado = false;
+  const buffer = [];
+
+  function initCadastro(){
+    if (cadastroInicializado) return;
+    cadastroInicializado = true;
+
+    const form  = document.getElementById('entryForm');
+    const tbody = document.querySelector('#preview tbody');
+
+    prefDataHoje();
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.total = ['din','deb','cre','pix','vou']
+        .map(k => parseFloat(data[k] || 0))
+        .reduce((a,b) => a + b, 0);
+
+      buffer.push(data);
+      appendRow(data);
+      form.reset(); prefDataHoje(); form.operador.focus();
+    });
+
+    function prefDataHoje(){
+      form.data.value = new Date().toISOString().slice(0,10);
+    }
+    function money(v){
+      return 'R$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+    function appendRow(d){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${d.data}</td><td>${d.operador}</td><td>${d.unidade}</td>
+        <td>${money(d.din)}</td><td>${money(d.deb)}</td><td>${money(d.cre)}</td>
+        <td>${money(d.pix)}</td><td>${money(d.vou)}</td><td>${money(d.total)}</td>`;
+      tbody.prepend(tr);
+    }
+  }
+
+  /* ---- abre dashboard na primeira carga ---- */
+  show('dash');
+
+})();
+
 /* ---------- init ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   setupNav();

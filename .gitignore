@@ -1,1 +1,84 @@
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Diretórios e arquivos do Node
 node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+
+# Diretórios e arquivos Java/Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+.mvn/
+mvnw
+mvnw.cmd
+.classpath
+.project
+.settings/
+
+# Diretórios e arquivos de IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+.factorypath
+
+# Diretórios e arquivos de compilação Electron
+dist/
+out/
+out-tsc/
+release/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Banco de dados SQLite (descomente se quiser excluir o banco do versionamento)
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# Backup files
+*.bak
+*~
+*.swp
+
+# Arquivos de configuração com senhas (ajuste conforme necessário)
+application-dev.properties
+application-prod.properties
+
+# Arquivos temporários
+temp/
+.temp/
+tmp/
+.tmp/
+
+# Cobertura de testes
+coverage/
+.nyc_output/
+
+# Arquivos específicos do projeto (adicione conforme necessário)
+opcoes.json

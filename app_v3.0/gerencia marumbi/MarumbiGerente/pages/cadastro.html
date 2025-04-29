@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastro • Marumbi Gerente</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+  <h1 class="brand">Marumbi<br />Gerente</h1>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html" class="">Dashboard</a></li>
+      <li><a href="cadastro.html"  class="active">Entrada</a></li>
+      <li><a href="despesas.html"  class="">Despesas</a></li>
+      <li><a href="relatorio.html" class="">Pagamentos</a></li>
+      <li><a href="settings.html"  class="">Configurações</a></li>
+    </ul>
+  </nav>
+</aside>
+
+  <main id="main-content">
+    <section class="page visible">
+  <h2>Lançar Movimentação</h2>
+  <form id="entryForm" class="form">
+    <div class="form-row">
+      <label>Data <input type="date" name="data" autofocus required /></label>
+      <label>Operador <input type="text" name="operador" required /></label>
+      <label>Unidade
+        <select name="unidade">
+          <option value="UN1">Marumbi I</option>
+          <option value="UN2">Marumbi II</option>
+        </select>
+      </label>
+    </div>
+    <div class="form-row">
+      <label>Dinheiro <input type="number" name="din" step="0.01" min="0" value="0" /></label>
+      <label>Débito   <input type="number" name="deb" step="0.01" min="0" value="0" /></label>
+      <label>Crédito  <input type="number" name="cre" step="0.01" min="0" value="0" /></label>
+      <label>Pix      <input type="number" name="pix" step="0.01" min="0" value="0" /></label>
+      <label>Voucher  <input type="number" name="vou" step="0.01" min="0" value="0" /></label>
+    </div>
+    <button type="submit" class="btn">Salvar</button>
+  </form>
+  <h3 style="margin-top:40px">Últimos lançamentos (sessão atual)</h3>
+  <table id="preview">
+    <thead>
+      <tr>
+        <th>Data</th><th>Op.</th><th>Unid.</th>
+        <th>Din</th><th>Deb</th><th>Cre</th><th>Pix</th><th>Vou</th><th>Total</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+  </main>
+  <script src="../renderer.js"></script>
+</body>
+</html>
